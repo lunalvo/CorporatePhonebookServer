@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<context-param>
+		<param-name>org.restlet.application</param-name>
+		<param-value>com.lunalvo.CorporatePhonebookServer.CorporatePhonebookServerServlet</param-value>
+	</context-param>
+	
+	<security-constraint>
+  <web-resource-collection>
+    <url-pattern>/ws/*</url-pattern>
+  </web-resource-collection>
+  <user-data-constraint>
+    <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+  </user-data-constraint>
+</security-constraint>
+
+	<servlet>
+		<servlet-name>CorporatePhonebookServer</servlet-name>
+		<servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CorporatePhonebookUploaderServlet</servlet-name>
+		<servlet-class>com.lunalvo.CorporatePhonebookServer.CorporatePhonebookUploaderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CorporatePhonebookServer</servlet-name>
+		<url-pattern>/ws/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CorporatePhonebookUploaderServlet</servlet-name>
+		<url-pattern>/uploader</url-pattern>
+	</servlet-mapping>
+ <servlet>
+  <servlet-name>SystemServiceServlet</servlet-name>
+  <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+  <init-param>
+   <param-name>services</param-name>
+   <param-value/>
+  </init-param>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>SystemServiceServlet</servlet-name>
+  <url-pattern>/_ah/spi/*</url-pattern>
+ </servlet-mapping>
+</web-app>
